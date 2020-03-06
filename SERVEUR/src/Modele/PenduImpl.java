@@ -15,9 +15,11 @@ public class PenduImpl extends UnicastRemoteObject implements PenduInter {
 	@Override
 	public Pendu initPartie() throws RemoteException {
 		String Mot = "Test";
+		Mot = Mot.replaceAll(".(?=.)", "$0 ").trim();
+		System.out.println(Mot);
 		String MotEnvoye="";
-		for(int i=0;i<Mot.length();i++) {
-			MotEnvoye=MotEnvoye+"_";
+		for(int i=0;i<(Mot.length()/2)+1;i++) {
+			MotEnvoye=MotEnvoye+"_ ";
 		}
 		Pendu P = new Pendu(10,Mot,MotEnvoye);
 		return P;
@@ -34,21 +36,20 @@ public class PenduImpl extends UnicastRemoteObject implements PenduInter {
 				MotE = MotE+c;
 				Find = true;}
 			else {
-				if(P.getMotEnvoyé().charAt(i)!='_') 
-					MotE = MotE+P.getMotEnvoyé().charAt(i);
+				if(P.getMotEnvoye().charAt(i)!='_') 
+					MotE = MotE+P.getMotEnvoye().charAt(i);
 				else
-					MotE= MotE+'_';
+					MotE= MotE+"_";
 		}
 		}
-		if (Find == false)
 			P.setChance(P.getChance()-1);
-		P.setMotEnvoyé(MotE);
+		P.setMotEnvoye(MotE);
 		return P;
 	}
 
 	@Override
 	public boolean winCheck(Pendu P) throws RemoteException {
-		if(!P.getMotEnvoyé().contains("_"))
+		if(!P.getMotEnvoye().contains("_"))
 			return true;
 		return false;
 	}
