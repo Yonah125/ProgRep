@@ -11,9 +11,9 @@ public class Serveur {
 		   int port = 8000;
 		   LocateRegistry.createRegistry(port);
 		   Naming.rebind("rmi://localhost:8000/Jeux", new PenduImpl());
-		   System.out.println("Compte Server prêt !.");
+		   System.out.println("Server pret !.");
 		  } catch (Exception e) {
-		   System.out.println("Compte Server échec" + e);
+		   System.out.println(" Server echec" + e);
 		  }
 		 }
 	}

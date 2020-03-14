@@ -3,6 +3,7 @@ package Modele;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -14,12 +15,22 @@ public class PenduImpl extends UnicastRemoteObject implements PenduInter {
 
 	@Override
 	public Pendu initPartie() throws RemoteException {
-		String Mot = "Test";
+		ArrayList<String> ListeMots = new ArrayList<String>(); 
+		ListeMots.add("Chaise");
+		ListeMots.add("Table");
+		ListeMots.add("Rouge");
+		ListeMots.add("Pierre");
+		ListeMots.add("Tableau");
+		
+		
+		int rand = (int)(Math.random() * ListeMots.size());
+		String Mot = ListeMots.get(rand);	
+		Mot = Mot.replaceAll(".(?=.)", "$0 ").trim();
 		String MotEnvoye="";
-		for(int i=0;i<Mot.length();i++) {
-			MotEnvoye=MotEnvoye+"_";
+		for(int i=0;i<(Mot.length()/2)+1;i++) {
+			MotEnvoye=MotEnvoye+"_ ";
 		}
-		Pendu P = new Pendu(10,Mot,MotEnvoye);
+		Pendu P = new Pendu(11,Mot,MotEnvoye);
 		return P;
 		
 		
@@ -34,21 +45,22 @@ public class PenduImpl extends UnicastRemoteObject implements PenduInter {
 				MotE = MotE+c;
 				Find = true;}
 			else {
-				if(P.getMotEnvoyé().charAt(i)!='_') 
-					MotE = MotE+P.getMotEnvoyé().charAt(i);
+				if(P.getMotEnvoye().charAt(i)!='_') 
+					MotE = MotE+P.getMotEnvoye().charAt(i);
 				else
-					MotE= MotE+'_';
+					MotE= MotE+"_";
 		}
 		}
-		if (Find == false)
+		if(!Find)
 			P.setChance(P.getChance()-1);
-		P.setMotEnvoyé(MotE);
+		P.setMotEnvoye(MotE);
+		P.getList().add(c);
 		return P;
 	}
 
 	@Override
 	public boolean winCheck(Pendu P) throws RemoteException {
-		if(!P.getMotEnvoyé().contains("_"))
+		if(!P.getMotEnvoye().contains("_"))
 			return true;
 		return false;
 	}

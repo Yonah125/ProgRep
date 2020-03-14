@@ -1,22 +1,38 @@
 package Modele;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Pendu implements Serializable {
 	int Chance;
 	String Mot;
-	String MotEnvoyé;
+	List<Character> list = new ArrayList<Character>();
+	String MotEnvoye;
 	
-	public Pendu(int chance, String mot, String motEnvoyé) {
+	public Pendu(int chance, String mot, String motEnvoye) {
 		super();
 		this.Chance = chance;
 		this.Mot = mot;
-		this.MotEnvoyé = motEnvoyé;
+		this.MotEnvoye = motEnvoye;
 	}
 
 
 	public int getChance() {
 		return Chance;
 	}
+	
+	
+	public List<Character> getList() {
+		return list;
+	}
+
+
+	public void setList(List<Character> list) {
+		this.list = list;
+	}
+
 
 	public void setChance(int chance) {
 		Chance = chance;
@@ -30,12 +46,12 @@ public class Pendu implements Serializable {
 		Mot = mot;
 	}
 
-	public String getMotEnvoyé() {
-		return MotEnvoyé;
+	public String getMotEnvoye() {
+		return MotEnvoye;
 	}
 
-	public void setMotEnvoyé(String motEnvoyé) {
-		MotEnvoyé = motEnvoyé;
+	public void setMotEnvoye(String motEnvoye) {
+		MotEnvoye = motEnvoye;
 	}
 	
 	
