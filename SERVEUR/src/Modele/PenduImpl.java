@@ -15,6 +15,7 @@ public class PenduImpl extends UnicastRemoteObject implements PenduInter {
 
 	@Override
 	public Pendu initPartie() throws RemoteException {
+
 		ArrayList<String> ListeMots = new ArrayList<String>(); 
 		ListeMots.add("Chaise");
 		ListeMots.add("Table");
